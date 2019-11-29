@@ -16,14 +16,14 @@
         <a th:href="@{/editImage(imageId=${image.id})}">Edit</a>
         <!-- Show the edit error if the non owner of the image is trying to edit the image-->
         <!--Uncomment the below code to show the error if the non owner of the image is trying to edit the image-->
-        <!--<div th:if="${editError}">Only the owner of the image can edit the image</div>-->
+        <div th:if="${editError}">Only the owner of thhe image can edit the image</div>
         <div><br></div>
         <form th:action="@{/deleteImage(imageId=${image.id})}" th:method="delete">
             <input type="submit" value="Delete"/>
         </form>
         <!-- Show the delete error if the non owner of the image is trying to delete the image-->
         <!--Uncomment the below code to show the error if the non owner of the image is trying to delete the image-->
-        <!--<div th:if="${deleteError}">Only the owner of the image can delete the image</div>-->
+        <div th:if="${deleteError}">Only the owner of the image can delete the image</div>
     </div>
 </nav>
 
@@ -64,7 +64,7 @@
             </fieldset>
             <div>
                 <input class="b ph3 pv2 input-reset ba b&#45;&#45;black bg-transparent grow pointer f6 dib" type="submit"
-                       value="Submit">
+                       valOnlyue="Submit">
             </div>
         </form>-->
 
