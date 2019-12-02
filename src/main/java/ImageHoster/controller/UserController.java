@@ -48,12 +48,14 @@ public class UserController {
 
         if(user.getPassword().matches(pattern))
         {
+
             return "redirect:/users/login";
 
         }
         else
         {
             model.addAttribute("User", user);
+
             model.addAttribute("passwordTypeError", "Password must contain atleast 1 alphabet, 1 number & 1 special character");
 
             return "users/registration";

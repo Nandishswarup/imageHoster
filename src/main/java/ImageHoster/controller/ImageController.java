@@ -3,6 +3,7 @@ package ImageHoster.controller;
 import ImageHoster.model.Image;
 import ImageHoster.model.Tag;
 import ImageHoster.model.User;
+import ImageHoster.service.CommentService;
 import ImageHoster.service.ImageService;
 import ImageHoster.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,9 @@ public class ImageController {
 
     @Autowired
     private ImageService imageService;
+
+    @Autowired
+    CommentService commentService;
 
     @Autowired
     private TagService tagService;
@@ -50,6 +54,8 @@ public class ImageController {
         Image image = imageService.getImage(id);
         model.addAttribute("image", image);
         model.addAttribute("tags", image.getTags());
+        model.addAttribute("comments", commentService.getAllComments(id));
+
         return "images/image";
     }
 
@@ -106,6 +112,7 @@ public class ImageController {
 
             model.addAttribute("editError", "Only the owner of the image can edit the image");
             model.addAttribute("image", image);
+           // model.addAttribute("comments", image.getComments());
 
             return "images/image.html";
 
@@ -115,6 +122,7 @@ public class ImageController {
             String tags = convertTagsToString(image.getTags());
             model.addAttribute("image", image);
             model.addAttribute("tags", tags);
+
             return "images/edit";
 
         }
@@ -173,6 +181,7 @@ public class ImageController {
 
             model.addAttribute("deleteError", "Only the owner of the image can delete the image");
             model.addAttribute("image", image);
+         //   model.addAttribute("comments", image.getComments());
 
             return "images/image.html";
 

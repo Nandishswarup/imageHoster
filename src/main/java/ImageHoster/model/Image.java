@@ -45,6 +45,13 @@ public class Image {
     @JoinColumn(name = "user_id")
     private User user;
 
+
+//    @OneToMany(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "comment_id")
+//    List<Comment> comments=new ArrayList<>();
+//
+//
+
     //The attribute contains a list of all the tags of an image
     //Note that no column will be generated for this attribute in the database instead a new table will be created
     //Since the mapping is Many to Many, a new table will be generated containing the two columns both referencing to the primary key of both the tables ('images', 'tags')
@@ -126,4 +133,12 @@ public class Image {
     public void setTags(List<Tag> tags) {
         this.tags = tags;
     }
+/*
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }*/
 }
