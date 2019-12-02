@@ -15,7 +15,7 @@ public class CommentService {
     CommentRepository commentRepository;
 
 
-    public void createPost(Comment comment)
+    public void createComment(Comment comment)
     {
 
        commentRepository.createComment(comment);

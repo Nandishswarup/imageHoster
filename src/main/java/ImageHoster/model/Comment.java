@@ -11,7 +11,7 @@ public class Comment {
 
     @Column(name = "id")
     @Id
-            @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     int id;
 
     @Column(name = "text")
@@ -61,6 +61,7 @@ public class Comment {
     public void setUser(User user) {
         this.user = user;
     }
+
     public Image getImage() {
         return image;
     }

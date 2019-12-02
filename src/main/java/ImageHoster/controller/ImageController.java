@@ -98,27 +98,22 @@ public class ImageController {
     //The method first needs to convert the list of all the tags to a string containing all the tags separated by a comma and then add this string in a Model type object
     //This string is then displayed by 'edit.html' file as previous tags of an image
     @RequestMapping(value = "/editImage")
-    public String editImage(@RequestParam("imageId") Integer imageId, Model model,HttpSession session) {
-        User loggedExistingUSer=(User) session.getAttribute("loggeduser");
-        Integer sessionUserId=loggedExistingUSer.getId();
-        Image image=imageService.getImage(imageId);
-        //System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< loggedExistingUSer "+loggedExistingUSer.getId()+">>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-        Integer imagecreator_id  = image.getUser().getId();
-        //System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< image user id "+image.getUser().getId()+">>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+    public String editImage(@RequestParam("imageId") Integer imageId, Model model, HttpSession session) {
+        User loggedExistingUSer = (User) session.getAttribute("loggeduser");
+        Integer sessionUserId = loggedExistingUSer.getId();
+        Image image = imageService.getImage(imageId);
+        Integer imagecreator_id = image.getUser().getId();
 
 
-        if(sessionUserId!=imagecreator_id)
-        {
+        //Checking if the logged in user is the author of the image. only then he can edit it
+        if (sessionUserId != imagecreator_id) {
 
             model.addAttribute("editError", "Only the owner of the image can edit the image");
             model.addAttribute("image", image);
-           // model.addAttribute("comments", image.getComments());
 
             return "images/image.html";
 
-        }
-        else
-        {
+        } else {
             String tags = convertTagsToString(image.getTags());
             model.addAttribute("image", image);
             model.addAttribute("tags", tags);
@@ -126,7 +121,6 @@ public class ImageController {
             return "images/edit";
 
         }
-
 
 
     }
@@ -170,28 +164,24 @@ public class ImageController {
     //The method calls the deleteImage() method in the business logic passing the id of the image to be deleted
     //Looks for a controller method with request mapping of type '/images'
     @RequestMapping(value = "/deleteImage", method = RequestMethod.DELETE)
-    public String deleteImageSubmit(@RequestParam(name = "imageId") Integer imageId, Model model,HttpSession session) {
+    public String deleteImageSubmit(@RequestParam(name = "imageId") Integer imageId, Model model, HttpSession session) {
 
-        User loggedExistingUSer=(User) session.getAttribute("loggeduser");
-        Integer sessionUserId=loggedExistingUSer.getId();
-        Image image=imageService.getImage(imageId);
-        Integer imagecreator_id  = image.getUser().getId();
-        if(sessionUserId!=imagecreator_id)
-        {
+        User loggedExistingUSer = (User) session.getAttribute("loggeduser");
+        Integer sessionUserId = loggedExistingUSer.getId();
+        Image image = imageService.getImage(imageId);
+        Integer imagecreator_id = image.getUser().getId();
+
+        //Checking if the logged in user is the author of the image. only then he can edit it
+        if (sessionUserId != imagecreator_id) {
 
             model.addAttribute("deleteError", "Only the owner of the image can delete the image");
             model.addAttribute("image", image);
-         //   model.addAttribute("comments", image.getComments());
-
             return "images/image.html";
 
-        }
-        else
-        {
+        } else {
             imageService.deleteImage(imageId);
             return "redirect:/images";
         }
-
 
 
     }
